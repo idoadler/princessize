@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{8072C325-DA52-50CE-C86A-689150DE0D7E}") = "princessize", "Assembly-CSharp-vs.csproj", "{99D27E11-DDBF-E061-D172-7FAC4F0A85A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99D27E11-DDBF-E061-D172-7FAC4F0A85A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99D27E11-DDBF-E061-D172-7FAC4F0A85A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99D27E11-DDBF-E061-D172-7FAC4F0A85A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99D27E11-DDBF-E061-D172-7FAC4F0A85A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+																																					GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = princessize.unityproj
+	EndGlobalSection
+
+EndGlobal
