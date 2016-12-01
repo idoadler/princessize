@@ -32,11 +32,15 @@ public class SpriteSlicer2DManager : MonoBehaviour
 	{
 		winScreen.SetActive (true);
 		if (currentLevel >= 0) {
+			PlayerPrefs.SetInt("levelScore"+currentLevel,1);
 			levelsManager.levelScore [currentLevel] = 1;
 			if (numberSliced <= star1score) {
 				star1.color = Color.white;
 				if (currentLevel >= 0)
+				{
+					PlayerPrefs.SetInt("levelScore"+currentLevel,2);
 					levelsManager.levelScore [currentLevel] = 2;
+				}
 			}
 			if (numberSliced <= star2score) {
 				if (endingObj != null)
@@ -44,8 +48,10 @@ public class SpriteSlicer2DManager : MonoBehaviour
 				if (levelEndingWinText != null)
 					levelEndingWinText.SetActive(true);
 				star2.color = Color.white;
-				if (currentLevel >= 0)
+				if (currentLevel >= 0) {
+					PlayerPrefs.SetInt("levelScore"+currentLevel,3);
 					levelsManager.levelScore [currentLevel] = 3;
+				}
 			}
 			winScore.text = "CUTS: " + numberSliced;
 		}

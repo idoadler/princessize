@@ -15,21 +15,19 @@ public class levelsManager : MonoBehaviour {
 			levelScore = new int[instanceLevels.Length];
 			for (int i = 0; i < instanceLevels.Length; i++) 
 			{
-				levelScore[i] = -1;
+				levelScore[i] = PlayerPrefs.GetInt("levelScore"+i,-1);
 			}
-		} else 
+		} 
+		for (int i = 0; i < levelScore.Length-1; i++) 
 		{
-			for (int i = 0; i < levelScore.Length-1; i++) 
+			if(levelScore[i] > -1)
 			{
-				if(levelScore[i] > -1)
-				{
-					instanceLevels[i+1].SetActive(true);
-					instanceLocks[i+1].SetActive(false);
-					token.transform.position = instanceLocks[i+1].transform.localPosition;
-				}
+				instanceLevels[i+1].SetActive(true);
+				instanceLocks[i+1].SetActive(false);
+				token.transform.position = instanceLocks[i+1].transform.localPosition;
 			}
-			if (levelScore[levelScore.Length-1] > -1)
-				token.SetActive(false);
 		}
+		if (levelScore[levelScore.Length-1] > -1)
+			token.SetActive(false);
 	}
 }
