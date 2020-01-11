@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class SpriteSlicer2DManager : MonoBehaviour 
 {
-	static public HashSet<object> allSliced = new HashSet<object>();
-	static public bool dragging = false;
-	static private SpriteSlicer2DManager instance;
-	TrailRenderer m_TrailRenderer;
-	List<SpriteSlicer2DSliceInfo> m_SlicedSpriteInfo = new List<SpriteSlicer2DSliceInfo>();
+	public static HashSet<object> allSliced = new HashSet<object>();
+	public static bool dragging = false;
+	private static SpriteSlicer2DManager instance;
+	private TrailRenderer m_TrailRenderer;
+	private List<SpriteSlicer2DSliceInfo> m_SlicedSpriteInfo = new List<SpriteSlicer2DSliceInfo>();
 	private int numberSliced = 0;
 	// win
 	public int currentLevel = 0;
@@ -26,17 +25,21 @@ public class SpriteSlicer2DManager : MonoBehaviour
 	public Text score;
 	public GameObject showOnWin;
 	public GameObject hideOnWin;
-
+	public bool disabled = false;
 
 	private void win()
 	{
 		winScreen.SetActive (true);
 		if (currentLevel >= 0) {
+			PlayerPrefs.SetInt("levelScore"+currentLevel,1);
 			levelsManager.levelScore [currentLevel] = 1;
 			if (numberSliced <= star1score) {
 				star1.color = Color.white;
 				if (currentLevel >= 0)
+				{
+					PlayerPrefs.SetInt("levelScore"+currentLevel,2);
 					levelsManager.levelScore [currentLevel] = 2;
+				}
 			}
 			if (numberSliced <= star2score) {
 				if (endingObj != null)
@@ -44,14 +47,16 @@ public class SpriteSlicer2DManager : MonoBehaviour
 				if (levelEndingWinText != null)
 					levelEndingWinText.SetActive(true);
 				star2.color = Color.white;
-				if (currentLevel >= 0)
+				if (currentLevel >= 0) {
+					PlayerPrefs.SetInt("levelScore"+currentLevel,3);
 					levelsManager.levelScore [currentLevel] = 3;
+				}
 			}
 			winScore.text = "CUTS: " + numberSliced;
 		}
 	}
 
-	static public void removeAndTest(object removed)
+	public static void removeAndTest(object removed)
 	{
 		if (!dragging) {
 			//TODO: check if sometimes this misses
@@ -61,27 +66,27 @@ public class SpriteSlicer2DManager : MonoBehaviour
 				instance.showOnWin.SetActive (true);
 				instance.hideOnWin.SetActive (false);
 				dragging = true;
-				instance.Invoke("win",1);
+				instance.Invoke(nameof(win),1);
 			}
 		}
 	}
 
-	struct MousePosition
+	private struct MousePosition
 	{
 		public Vector3 m_WorldPosition;
 		public float m_Time;
 	}
 
-	List<MousePosition> m_MousePositions = new List<MousePosition>();
-	float m_MouseRecordTimer = 0.0f;
-	float m_MouseRecordInterval = 0.05f;
-	int m_MaxMousePositions = 5;
-    bool m_FadeFragments = false;
-	
+	private List<MousePosition> m_MousePositions = new List<MousePosition>();
+	private float m_MouseRecordTimer = 0.0f;
+	private const float m_MouseRecordInterval = 0.05f;
+	private const int m_MaxMousePositions = 5;
+	private const bool m_FadeFragments = false;
+
 	/// <summary>
 	/// Start this instance.
 	/// </summary>
-	void Start ()
+	private void Start ()
 	{
 		dragging = false;
 		instance = this;
@@ -92,10 +97,10 @@ public class SpriteSlicer2DManager : MonoBehaviour
 	/// <summary>
 	/// Update this instance.
 	/// </summary>
-	void Update () 
+	private void Update () 
 	{
 		// Left mouse button - hold and swipe to cut objects
-		if(Input.GetMouseButton(0) && !dragging)
+		if(Input.GetMouseButton(0) && !dragging && !disabled)
 		{
 			bool mousePositionAdded = false;
 			m_MouseRecordTimer -= Time.deltaTime;
@@ -134,7 +139,11 @@ public class SpriteSlicer2DManager : MonoBehaviour
 					if(m_SlicedSpriteInfo.Count > 0)
 					{
 						if (tutorialText != null)
-							tutorialText.SetActive (true);
+						{
+							tutorialText.SetActive(true);
+							disabled = true;
+						}
+
 						numberSliced++;
 						score.text = "CUTS: " + numberSliced;
 
@@ -172,13 +181,13 @@ public class SpriteSlicer2DManager : MonoBehaviour
 		// Sliced sprites sharing the same layer as standard Unity sprites could increase the draw call count as
 		// the engine will have to keep swapping between rendering SlicedSprites and Unity Sprites.To avoid this, 
 		// move the newly sliced sprites either forward or back along the z-axis after they are created
-		for(int spriteIndex = 0; spriteIndex < m_SlicedSpriteInfo.Count; spriteIndex++)
+		foreach (var info in m_SlicedSpriteInfo)
 		{
-			for(int childSprite = 0; childSprite < m_SlicedSpriteInfo[spriteIndex].ChildObjects.Count; childSprite++)
+			foreach (var child in info.ChildObjects)
 			{
-				Vector3 spritePosition = m_SlicedSpriteInfo[spriteIndex].ChildObjects[childSprite].transform.position;
+				Vector3 spritePosition = child.transform.position;
 				spritePosition.z = -1.0f;
-				m_SlicedSpriteInfo[spriteIndex].ChildObjects[childSprite].transform.position = spritePosition;
+				child.transform.position = spritePosition;
 			}
 		}
 

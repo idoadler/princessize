@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class loadLevel : MonoBehaviour {
 
@@ -8,41 +8,36 @@ public class loadLevel : MonoBehaviour {
 	public string level;
 
 	// Use this for initialization
-	void Start () {
+	private void Start () {
 		if (GetComponent<SpriteRenderer>() != null)
 			buttonUp = GetComponent<SpriteRenderer> ().sprite;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-	void OnMouseEnter()
+	private void OnMouseEnter()
 	{
 		if (buttonPressed != null)
 			GetComponent<SpriteRenderer>().sprite = buttonPressed;
 	}
-	
-	void OnMouseExit()
+
+	private void OnMouseExit()
 	{
 		if (buttonUp != null)
 			GetComponent<SpriteRenderer>().sprite = buttonUp;
 	}
-	
-	void OnMouseDown()
+
+	private void OnMouseDown()
 	{
 		if (buttonPressed != null)
 			GetComponent<SpriteRenderer>().sprite = buttonPressed;
 	}
-	
-	void OnMouseUp()
+
+	private void OnMouseUp()
 	{
 		if (buttonUp != null)
 			GetComponent<SpriteRenderer>().sprite = buttonUp;
 		if (string.IsNullOrEmpty(level))
-			Application.LoadLevel(Application.loadedLevel);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		else
-			Application.LoadLevel(level);
+			SceneManager.LoadScene(level);
 	}
 }

@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
-
 
 class DragTransform : MonoBehaviour
 {
-
-	private Vector3 screenPoint;
 	private Vector3 offset;
+	public bool destroyed = false;
 
 	private Color mouseOverColor = new Color(1,0.96f,0.6f);
 	private Color originalColor = Color.white;
@@ -15,18 +12,18 @@ class DragTransform : MonoBehaviour
 	private bool dragging = false;
 	private float distance;
 
-	void Start()
+	private void Start()
 	{
 		OnMouseExit ();
 	}
-	
-	void OnMouseEnter()
+
+	private void OnMouseEnter()
 	{
 		if (!SpriteSlicer2DManager.dragging)
 			GetComponent<Renderer>().material.color = mouseOverColor;
 	}
-	
-	void OnMouseExit()
+
+	private void OnMouseExit()
 	{
 		if (outside) {
 			if (!SpriteSlicer2DManager.allSliced.Contains(this.gameObject))
@@ -38,48 +35,51 @@ class DragTransform : MonoBehaviour
 			GetComponent<Renderer> ().material.color = originalColor;
 		}
 	}
-	
-	void OnMouseDown()
+
+	private void OnMouseDown()
 	{
-		if (!SpriteSlicer2DManager.dragging) {
-			offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-			dragging = true;
-			SpriteSlicer2DManager.dragging = true;
-		}
+		if (SpriteSlicer2DManager.dragging) 
+			return;
+		
+		offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+		dragging = true;
+		SpriteSlicer2DManager.dragging = true;
 	}
-	
-	void OnMouseUp()
+
+	private void OnMouseUp()
 	{
 		dragging = false;
 		SpriteSlicer2DManager.dragging = false;
 		OnMouseExit ();
 	}
-	
-	void OnTriggerEnter2D(Collider2D other) {
-		if (other.tag == "limits") {
+
+	private void OnTriggerEnter2D(Collider2D other) {
+		if (other.CompareTag("limits")) {
 			outside = true;
 		}
 		OnMouseExit ();
 	}
-	
-	void OnTriggerExit2D(Collider2D other) {
-		if (other.tag == "limits") {
+
+	private void OnTriggerExit2D(Collider2D other) {
+		if (destroyed)
+			return;
+		if (other.CompareTag("limits")) {
 			outside = false;
 		}
 		OnMouseExit ();
 	}
 
-	void OnDestroy() {
+	private void OnDestroy() {
 		SpriteSlicer2DManager.allSliced.Remove (this.gameObject);
 	}
-	
-	void Update()
+
+	private void Update()
 	{
-		if (dragging)
-		{
-			Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-			Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-			transform.position = curPosition;
-		}
+		if (!dragging) 
+			return;
+		
+		Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+		Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+		transform.position = curPosition;
 	}
 }
