@@ -57,11 +57,14 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\backButton.cs" />
+     <Compile Include="Assets\Scripts\DisableObject.cs" />
      <Compile Include="Assets\Scripts\DragTransform.cs" />
+     <Compile Include="Assets\Scripts\EnableObject.cs" />
      <Compile Include="Assets\Scripts\levelsManager.cs" />
      <Compile Include="Assets\Scripts\loadLevel.cs" />
      <Compile Include="Assets\Scripts\loadLevelEnding.cs" />
      <Compile Include="Assets\Scripts\MusicManager.cs" />
+     <Compile Include="Assets\Scripts\OpenURL.cs" />
      <Compile Include="Assets\Scripts\SpriteSlicer2D.cs" />
      <Compile Include="Assets\Scripts\SpriteSlicer2DManager.cs" />
      <Compile Include="Assets\SpriteSlicer2D\Demo\Scripts\FadeAndDestroy.cs" />

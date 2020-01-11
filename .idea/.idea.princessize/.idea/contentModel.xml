@@ -9,11 +9,14 @@
         <e p="README.txt" t="Include" />
         <e p="Scripts" t="Include">
           <e p="backButton.cs" t="Include" />
+          <e p="DisableObject.cs" t="Include" />
           <e p="DragTransform.cs" t="Include" />
+          <e p="EnableObject.cs" t="Include" />
           <e p="levelsManager.cs" t="Include" />
           <e p="loadLevel.cs" t="Include" />
           <e p="loadLevelEnding.cs" t="Include" />
           <e p="MusicManager.cs" t="Include" />
+          <e p="OpenURL.cs" t="Include" />
           <e p="SpriteSlicer2D.cs" t="Include" />
           <e p="SpriteSlicer2DManager.cs" t="Include" />
         </e>
