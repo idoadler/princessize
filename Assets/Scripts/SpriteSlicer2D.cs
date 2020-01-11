@@ -856,12 +856,7 @@ public static class SpriteSlicer2D
 		childRigidBody.angularDrag = parentRigidBody.angularDrag;
 		childRigidBody.gravityScale = parentRigidBody.gravityScale;
 
-#if UNITY_5
 		childRigidBody.constraints = parentRigidBody.constraints;
-#else
-        childRigidBody.fixedAngle = parentRigidBody.fixedAngle;
-#endif
-
 		childRigidBody.isKinematic = parentRigidBody.isKinematic;
 		childRigidBody.interpolation = parentRigidBody.interpolation;
 		childRigidBody.sleepMode = parentRigidBody.sleepMode;

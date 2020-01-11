@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class SpriteSlicer2DDemoManager : MonoBehaviour 
 {
-	List<SpriteSlicer2DSliceInfo> m_SlicedSpriteInfo = new List<SpriteSlicer2DSliceInfo>();
-	TrailRenderer m_TrailRenderer;
+	private List<SpriteSlicer2DSliceInfo> m_SlicedSpriteInfo = new List<SpriteSlicer2DSliceInfo>();
+	private TrailRenderer m_TrailRenderer;
 
-	struct MousePosition
+	private struct MousePosition
 	{
 		public Vector3 m_WorldPosition;
 		public float m_Time;
@@ -23,7 +24,7 @@ public class SpriteSlicer2DDemoManager : MonoBehaviour
 	/// <summary>
 	/// Start this instance.
 	/// </summary>
-	void Start ()
+	private void Start ()
 	{
 		m_TrailRenderer = GetComponentInChildren<TrailRenderer>();
 	}
@@ -31,7 +32,7 @@ public class SpriteSlicer2DDemoManager : MonoBehaviour
 	/// <summary>
 	/// Update this instance.
 	/// </summary>
-	void Update () 
+	private void Update () 
 	{
 		// Right mouse button - explode any sprite the we click on
 		if(Input.GetMouseButtonDown(0) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftAlt)))
@@ -159,11 +160,11 @@ public class SpriteSlicer2DDemoManager : MonoBehaviour
 	/// <summary>
 	/// Draws the GUI
 	/// </summary>
-	void OnGUI () 
+	private void OnGUI () 
 	{
 		if(GUI.Button(new Rect(20,20,120,20), "Reset Scene")) 
 		{
-			Application.LoadLevel(Application.loadedLevel);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
 
         m_FadeFragments = GUI.Toggle(new Rect(20, 50, 400, 20), m_FadeFragments, "Fade out sprites once destroyed");

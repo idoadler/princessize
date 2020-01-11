@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Micro\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Micro\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_princessize.-983205995.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Micro\Documents\Git\princessize" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="README.txt" t="Include" />
+        <e p="Scripts" t="Include">
+          <e p="backButton.cs" t="Include" />
+          <e p="DragTransform.cs" t="Include" />
+          <e p="levelsManager.cs" t="Include" />
+          <e p="loadLevel.cs" t="Include" />
+          <e p="loadLevelEnding.cs" t="Include" />
+          <e p="MusicManager.cs" t="Include" />
+          <e p="SpriteSlicer2D.cs" t="Include" />
+          <e p="SpriteSlicer2DManager.cs" t="Include" />
+        </e>
+        <e p="SpriteSlicer2D" t="Include">
+          <e p="Demo" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="FadeAndDestroy.cs" t="Include" />
+              <e p="SpriteSlicer2DDemoManager.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="princessize.sln" t="IncludeFlat" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
