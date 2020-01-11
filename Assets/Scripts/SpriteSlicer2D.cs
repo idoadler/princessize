@@ -827,6 +827,7 @@ public static class SpriteSlicer2D
 							
 							if(destroySlicedObjects)
 							{
+								parentRigidBody.GetComponent<DragTransform>().destroyed = true;
 								GameObject.Destroy(parentRigidBody.gameObject);
 							}
 							else

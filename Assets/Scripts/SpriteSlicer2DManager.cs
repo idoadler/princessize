@@ -26,7 +26,7 @@ public class SpriteSlicer2DManager : MonoBehaviour
 	public Text score;
 	public GameObject showOnWin;
 	public GameObject hideOnWin;
-
+	public bool disabled = false;
 
 	private void win()
 	{
@@ -67,7 +67,7 @@ public class SpriteSlicer2DManager : MonoBehaviour
 				instance.showOnWin.SetActive (true);
 				instance.hideOnWin.SetActive (false);
 				dragging = true;
-				instance.Invoke("win",1);
+				instance.Invoke(nameof(win),1);
 			}
 		}
 	}
@@ -87,7 +87,7 @@ public class SpriteSlicer2DManager : MonoBehaviour
 	/// <summary>
 	/// Start this instance.
 	/// </summary>
-	void Start ()
+	private void Start ()
 	{
 		dragging = false;
 		instance = this;
@@ -98,10 +98,10 @@ public class SpriteSlicer2DManager : MonoBehaviour
 	/// <summary>
 	/// Update this instance.
 	/// </summary>
-	void Update () 
+	private void Update () 
 	{
 		// Left mouse button - hold and swipe to cut objects
-		if(Input.GetMouseButton(0) && !dragging)
+		if(Input.GetMouseButton(0) && !dragging && !disabled)
 		{
 			bool mousePositionAdded = false;
 			m_MouseRecordTimer -= Time.deltaTime;
@@ -140,7 +140,11 @@ public class SpriteSlicer2DManager : MonoBehaviour
 					if(m_SlicedSpriteInfo.Count > 0)
 					{
 						if (tutorialText != null)
-							tutorialText.SetActive (true);
+						{
+							tutorialText.SetActive(true);
+							disabled = true;
+						}
+
 						numberSliced++;
 						score.text = "CUTS: " + numberSliced;
 
