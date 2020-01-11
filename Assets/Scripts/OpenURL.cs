@@ -13,10 +13,10 @@ public class OpenURL : MonoBehaviour
 
     public void Action()
     {
-#if !UNITY_WEBGL
-        Application.OpenURL(url);
-#else
+#if UNITY_WEBGL && !UNITY_EDITOR
         openPage(url);
+#else
+        Application.OpenURL(url);
 #endif
     }
 }
