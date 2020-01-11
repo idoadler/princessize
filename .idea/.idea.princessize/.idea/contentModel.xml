@@ -19,6 +19,7 @@
           <e p="OpenURL.cs" t="Include" />
           <e p="SpriteSlicer2D.cs" t="Include" />
           <e p="SpriteSlicer2DManager.cs" t="Include" />
+          <e p="ToDo.cs" t="Include" />
         </e>
         <e p="SpriteSlicer2D" t="Include">
           <e p="Demo" t="Include">

@@ -1,4 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/lvl4.unity
+- path: Assets/Scenes/splash.unity
   isLoaded: 1
   isActive: 1
+  isSubScene: 0
